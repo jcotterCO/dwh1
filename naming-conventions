@@ -1,0 +1,40 @@
+TO INSERT
+
+DAY LAST YEAR
+       [DaySalesLastYearCompAUD] [numeric](38, 4) NULL,					
+  \\AS ABOVE GP       
+       [DayGrossProfitLastYearCompAUD] [numeric](38, 4) NULL,			
+       
+       
+SAME DAY LAST WEEK
+       [SDLWSalesLastYearCompAUD] [numeric](38, 4) NULL,				
+  \\AS ABOVE GP      
+       [SDLWGrossProfitLastYearCompAUD] [numeric](38, 4) NULL,			
+       
+       
+WEEK TO DATE LAST YEAR
+       [WTDSalesLastYearCompAUD] [numeric](38, 4) NULL,					
+  \\AS ABOVE GP      
+       [WTDGrossProfitLastYearCompAUD] [numeric](38, 4) NULL,			
+       
+       
+MONTH TO DATE LAST YEAR
+       [MTDSalesLastYearCompAUD] [numeric](38, 4) NULL,					
+  \\AS ABOVE GP       
+       [MTDGrossProfitLastYearCompAUD] [numeric](38, 4) NULL,			
+       
+       
+FULL MONTH LAST YEAR
+       [FullMonthSalesLastYearCompAUD] [numeric](38, 4) NULL,			
+  \\AS ABOVE GP      
+       [FullMonthGrossProfitLastYearCompAUD] [numeric](38, 4) NULL,		
+       
+       
+LAST WEEK TO DATE LAST YEAR
+       [LWTDSalesLastYearCompAUD] [numeric](38, 4) NULL,				
+  \\AS ABOVE GP      
+       [LWTDGrossProfitLastYearCompAUD] [numeric](38, 4) NULL,			
+
+
+ForEach AS insert Comp_ before last word
+E.g., Sales_LY_DailyA to Sales_LY_Comp_DailyA
