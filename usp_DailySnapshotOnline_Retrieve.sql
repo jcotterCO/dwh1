@@ -1,6 +1,16 @@
+-- =============================================
+-- Author:		Avanade
+-- Create date: 01-01-2019
+-- Description:	Retrieve data from FACTSALES for use in Daily Snapshot Online Summary
+-- 
+-- Edit History
+-- Date 			Author 				Changes
+-- 08/08/19 		Jaymes Cotter 		Adding new returnable fields containing LY Local Sales @ Current AUD FX Rate in order to correctly calculate Comps and GP. 
+-- =============================================
+
 USE [CDM]
 GO
-/****** Object:  StoredProcedure [rpt].[usp_DailySnapshotOnline_Retrieve]    Script Date: 12/08/2019 9:57:39 AM ******/
+/****** Object:  StoredProcedure [rpt].[usp_DailySnapshotOnline_Retrieve]    Script Date: 9/08/2019 11:16:36 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -58,7 +68,18 @@ SUM(CASE WHEN DoorCompFlag       = 1 THEN MTDSalesLastYearAUD ELSE 0 END)						 
 SUM(CASE WHEN DivisionCompFlag   = 1 THEN MTDSalesThisYearAUD ELSE 0 END)					                            AS 'ThisYearMonthToDateSaleAUDCompDiv', --MTD
 SUM(CASE WHEN DivisionCompFlag   = 1 THEN MTDSalesLastYearAUD ELSE 0 END)					                            AS 'LastYearMonthToDateSaleAUDCompDiv', --MTD
 SUM(MTDGrossProfitThisYearAUD)																						    AS 'ThisYearMonthToDateGrossProfitAUD',
-SUM(MTDTransactionCountThisYear)																						AS 'ThisYearMonthToDateTxnCount'
+SUM(MTDTransactionCountThisYear)																						AS 'ThisYearMonthToDateTxnCount'--,
+
+/* NEW */
+-- SUM(CASE WHEN DoorCompFlag = 1 THEN [DaySalesLastYearCompAUD] ELSE 0 END)                           							AS 'LastYearDaySalesAUDComp', --DC
+-- SUM(CASE WHEN DivisionCompFlag = 1 THEN [DaySalesLastYearCompAUD] ELSE 0 END)												AS 'LastYearDaySalesAUDCompDiv', --DC
+-- SUM(CASE WHEN DoorCompFlag		= 1 THEN WTDSalesLastYearCompAUD ELSE 0 END)												AS 'LastYearWeekToDateSaleAUDComp', --WTD Comp
+-- SUM(CASE WHEN DivisionCompFlag  = 1 THEN WTDSalesLastYearCompAUD ELSE 0 END)													AS 'LastYearWeekToDateSaleAUDCompDiv', --WTD Comp
+-- SUM(MTDSalesLastYearCompAUD)																									AS 'LastYearMonthToDateSaleAUD', --MTD
+-- SUM(CASE WHEN DoorCompFlag       = 1 THEN MTDSalesLastYearCompAUD ELSE 0 END)						                        AS 'LastYearMonthToDateSaleAUDComp', --MTD
+-- SUM(CASE WHEN DivisionCompFlag   = 1 THEN MTDSalesLastYearCompAUD ELSE 0 END)					                            AS 'LastYearMonthToDateSaleAUDCompDiv' --MTD																						    AS 'ThisYearMonthToDateGrossProfitAUD',
+
+-- Rename the above AS names, or will they just end up replacing the existing ones with the new/correct numbers?
 
 FROM [rpt].[ReportData] T
 LEFT JOIN @OtherDept od
